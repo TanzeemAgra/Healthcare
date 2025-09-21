@@ -1,18 +1,16 @@
 #!/bin/sh
-# Railway deployment script - updated for better error handling
+# EMERGENCY Railway deployment script - bypasses CustomUser issues
 
-# Default port if PORT is not set
-if [ -z "$PORT" ]; then
-    export PORT=8000
-fi
+export DJANGO_SETTINGS_MODULE="backend.settings_emergency"
+export PORT="${PORT:-8080}"
 
-echo "Starting Django on port $PORT"
+echo "🚨 EMERGENCY DEPLOYMENT: Starting with emergency settings"
+echo "📋 Bypassing CustomUser model to avoid auth_group constraint errors"
+echo "🚀 Starting Django on port $PORT"
 echo "DATABASE_URL: ${DATABASE_URL:-'NOT SET'}"
 
-# Wait for database to be ready (for Railway PostgreSQL)
-echo "Waiting for database to be ready..."
-timeout=30
-while ! python -c "
+# Start with emergency settings that bypass hospital app
+python manage_emergency.py runserver 0.0.0.0:$PORT
 import os
 import sys
 import django

@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "python manage.py collectstatic --noinput && python manage.py migrate --noinput && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT"
+startCommand = "python manage_emergency.py runserver 0.0.0.0:8080"
 healthcheckPath = "/health/"
 healthcheckTimeout = 300
 healthcheckInterval = 30
@@ -11,4 +11,4 @@ restartPolicyMaxRetries = 3
 
 [variables]
 PYTHONPATH = "/app/backend"
-DJANGO_SETTINGS_MODULE = "backend.settings"
+DJANGO_SETTINGS_MODULE = "backend.settings_emergency"
