@@ -61,7 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "backend.urls"
+ROOT_URLCONF = "backend.urls_emergency"
 
 TEMPLATES = [
     {
@@ -154,3 +154,38 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# Emergency configurations (bypass hospital.password_config imports)
+PASSWORD_POLICY = {
+    'MIN_LENGTH': 8,
+    'REQUIRE_UPPERCASE': True,
+    'REQUIRE_LOWERCASE': True, 
+    'REQUIRE_DIGIT': True,
+    'REQUIRE_SPECIAL_CHAR': False,
+    'PREVENT_COMMON_PASSWORDS': True,
+    'PREVENT_USER_INFO_IN_PASSWORD': True,
+}
+
+EMAIL_TEMPLATES = {
+    'password_reset': {
+        'subject': 'Password Reset - Healthcare Platform',
+        'template': 'Password reset request received.'
+    }
+}
+
+# Emergency logging (simplified)
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    },
+}
