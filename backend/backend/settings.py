@@ -90,6 +90,8 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = "backend.wsgi.application"
+
 
 # Database (Railway PostgreSQL - Exclusive)
 import dj_database_url
