@@ -21,6 +21,35 @@ extra_hosts = os.getenv("ALLOWED_HOSTS", "")
 if extra_hosts:
     ALLOWED_HOSTS.extend(filter(None, extra_hosts.split(",")))
 
+# Environment Variables (Emergency defaults to prevent AttributeError)
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "emergency-placeholder-key")
+
+# AWS Configuration (comprehensive)
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", "emergency-placeholder")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", "emergency-placeholder")
+AWS_REGION = os.getenv("AWS_REGION", "ap-south-1")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", "healthcare-emergency-bucket")
+
+# Additional AWS settings that services expect
+AWS_STORAGE_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", "healthcare-emergency-bucket")
+AWS_S3_REGION_NAME = os.getenv("AWS_REGION", "ap-south-1")
+AWS_SES_REGION = os.getenv("AWS_SES_REGION", "ap-south-1")
+AWS_SNS_REGION = os.getenv("AWS_SNS_REGION", "ap-south-1")
+AWS_SES_FROM_EMAIL = os.getenv("AWS_SES_FROM_EMAIL", "noreply@healthcare-emergency.com")
+
+# Email settings (using environment variables)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() == "true"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Healthcare Emergency <noreply@healthcare.com>")
+
+# Razorpay settings (emergency placeholders)
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "emergency-placeholder")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "emergency-placeholder")
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",

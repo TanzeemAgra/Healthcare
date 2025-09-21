@@ -10,15 +10,20 @@ logger = logging.getLogger(__name__)
 
 class RadiologyAIService:
     def __init__(self):
-        if not settings.OPENAI_API_KEY:
-            logger.warning("OPENAI_API_KEY not set. Radiology AI services will not be available.")
-            self.client = None
-        else:
-            try:
-                self.client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
-            except Exception as e:
-                logger.error(f"Failed to initialize OpenAI client: {e}")
+        try:
+            openai_key = getattr(settings, 'OPENAI_API_KEY', None)
+            if not openai_key or openai_key == "emergency-placeholder-key":
+                logger.warning("OPENAI_API_KEY not set or in emergency mode. Radiology AI services will not be available.")
                 self.client = None
+            else:
+                try:
+                    self.client = openai.OpenAI(api_key=openai_key)
+                except Exception as e:
+                    logger.error(f"Failed to initialize OpenAI client: {e}")
+                    self.client = None
+        except Exception as e:
+            logger.warning(f"Settings access error during AI service init: {e}")
+            self.client = None
 
     def _make_chat_completion_request(self, messages, model="gpt-3.5-turbo", max_tokens=1500, temperature=0.5, response_format=None):
         if not self.client:
@@ -385,4 +390,15 @@ It is CRITICAL that the 'segment' is the precise text from the original document
             "message": "Analysis completed using simulation mode (OpenAI API not configured)"
         }
 
-radiology_ai_service = RadiologyAIService()
+# Lazy initialization to avoid import-time errors
+radiology_ai_service = None
+
+def get_radiology_ai_service():
+    global radiology_ai_service
+    if radiology_ai_service is None:
+        try:
+            radiology_ai_service = RadiologyAIService()
+        except Exception as e:
+            logger.warning(f"Failed to initialize radiology AI service: {e}")
+            radiology_ai_service = RadiologyAIService()  # Will create with null client
+    return radiology_ai_service

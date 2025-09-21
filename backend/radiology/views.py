@@ -12,7 +12,7 @@ from .serializers import (
 )
 from .serializers import MultimodalQueryRequestSerializer, MultimodalQueryResponseSerializer
 from .services.file_parser_service import parse_file_content
-from .services.ai_service import radiology_ai_service
+from .services.ai_service import get_radiology_ai_service
 from .models import ProcessedDocument
 import logging
 
@@ -50,7 +50,7 @@ class AnonymizeDocumentView(APIView):
             processed_doc_record.save()
             return Response({"error": "An unexpected error occurred while processing the file."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        anonymized_text, redaction_summary, error = radiology_ai_service.anonymize_document_text(text_content)
+        anonymized_text, redaction_summary, error = get_radiology_ai_service().anonymize_document_text(text_content)
 
         if error:
             logger.error(f"Anonymization AI error: {error}")
@@ -106,7 +106,7 @@ class RadiologyMultimodalQueryView(APIView):
         except json.JSONDecodeError:
             logger.warning("Failed to parse conversation_history_json string.")
         
-        ai_response, error = radiology_ai_service.query_image_with_text(
+        ai_response, error = get_radiology_ai_service().query_image_with_text(
             image_file_obj=image_file,
             text_query=user_query,
             report_context=report_context_snippet,
@@ -168,7 +168,7 @@ class AnalyzeReportView(APIView):
 
         processed_doc_record.input_preview = text_content[:500]
         
-        analysis_result, error = radiology_ai_service.analyze_radiology_report(text_content)
+        analysis_result, error = get_radiology_ai_service().analyze_radiology_report(text_content)
 
         if error and not analysis_result:
             logger.error(f"Report analysis AI error: {error}")
