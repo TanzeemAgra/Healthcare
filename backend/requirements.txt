@@ -40,6 +40,9 @@ sendgrid>=6.0.0
 
 # Payment Processing
 razorpay>=1.4.0
+setuptools>=68.0.0
+wheel>=0.38.0
+packaging>=21.0.0
 
 # Task Processing
 celery>=5.3.0
