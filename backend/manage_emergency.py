@@ -12,7 +12,7 @@ from django.core.management import execute_from_command_line
 def main():
     """Run administrative tasks with emergency settings."""
     # Use emergency settings that bypass CustomUser model
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings_emergency')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings_emergency')
     
     print("🚨 EMERGENCY STARTUP: Using alternative settings without CustomUser model")
     print("📋 This bypasses migration issues to get the app running")
