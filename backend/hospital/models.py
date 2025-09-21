@@ -61,6 +61,25 @@ class CustomUser(AbstractUser):
         ('patient', 'Patient'),
         ('pharmacist', 'Pharmacist'),
     ]
+    
+    # Override the groups and user_permissions fields to fix related_name conflicts
+    groups = models.ManyToManyField(
+        'auth.Group',
+        verbose_name=_('groups'),
+        blank=True,
+        help_text=_('The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
+        related_name='hospital_customuser_set',
+        related_query_name='hospital_customuser',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        verbose_name=_('user permissions'),
+        blank=True,
+        help_text=_('Specific permissions for this user.'),
+        related_name='hospital_customuser_set',
+        related_query_name='hospital_customuser',
+    )
+    
     # username is inherited from AbstractUser, unique=True by default.
     # We auto-generate it if not provided, but email is the login field.
     email = models.EmailField(_('email address'), unique=True) # Email is the login identifier
