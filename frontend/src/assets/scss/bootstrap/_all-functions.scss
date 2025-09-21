@@ -1,0 +1,86 @@
+@use "sass:color";
+@use "sass:math";
+@use "sass:list";
+@use "sass:map";
+
+// Re-export functions with their private names
+@forward "functions" hide _assert-ascending, _assert-starts-at-zero;
+
+// Ascending
+// Used to evaluate Sass maps like our grid breakpoints.
+@mixin assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null or math.unit($num) == "%" or math.unit($prev-num) == "%" {
+      // Do nothing
+    } @else if not math.compatible($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+@mixin assert-starts-at-zero($map, $map-name: "$grid-breakpoints") {
+  $values: map.values($map);
+  $first-value: list.nth($values, 1);
+  @if $first-value != 0 {
+    @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
+  }
+}
+
+// Return base color contrast based on luminance for accessibility
+@function color-contrast($background, $dark: #000, $light: #fff) {
+  @if not color.is-color($background) {
+    @warn "Could not determine text color for background color `#{$background}`";
+    @return null;
+  }
+  
+  $l: color.lightness($background) * 0.01;
+  
+  // Calculate perceptive luminance
+  // See https://www.w3.org/WAI/GL/wiki/Relative_luminance
+  $l: if(
+    $l <= 0.03928,
+    $l / 12.92,
+    math.pow(($l + 0.055) / 1.055, 2.4)
+  );
+  
+  // Return black for dark backgrounds, white for light
+  @return if($l > 0.179, $dark, $light);
+}
+
+// Return opaque color
+// opaque(#fff, #000) => #000
+@function opaque($background, $foreground) {
+  @return color.mix($foreground, $background, 100%);
+}
+
+// Return color-specific contrast ratio
+@function contrast-ratio($background, $foreground) {
+  $l1: color.lightness($background);
+  $l2: color.lightness($foreground);
+  
+  @return max($l1, $l2) / min($l1, $l2);
+}
+
+// Return RGB array
+@function to-rgb($value) {
+  @return (
+    r: color.channel($value, "red", rgb),
+    g: color.channel($value, "green", rgb),
+    b: color.channel($value, "blue", rgb)
+  );
+}
+
+// Return a CSS variable value
+@function tint-color($color, $weight) {
+  @return color.mix(white, $color, $weight);
+}
+
+@function shade-color($color, $weight) {
+  @return color.mix(black, $color, $weight);
+}

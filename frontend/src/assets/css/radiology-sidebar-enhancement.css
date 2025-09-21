@@ -1,0 +1,156 @@
+/* 
+🎨 Radiology Sidebar Enhancement Styles
+=====================================
+Soft-coded CSS for improving sidebar navigation alignment and user experience
+*/
+
+/* Enhanced Radiology Sub-navigation */
+.sidebar .sub-nav .nav-link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.75rem 1rem 0.75rem 2.5rem !important;
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  position: relative;
+}
+
+.sidebar .sub-nav .nav-link:hover {
+  background-color: rgba(var(--bs-primary-rgb), 0.1) !important;
+  transform: translateX(5px);
+  border-left: 3px solid var(--bs-primary);
+}
+
+.sidebar .sub-nav .nav-link.active {
+  background-color: rgba(var(--bs-primary-rgb), 0.15) !important;
+  color: var(--bs-primary) !important;
+  border-left: 4px solid var(--bs-primary);
+  font-weight: 600;
+}
+
+/* Icon Alignment */
+.sidebar .sub-nav .nav-link .icon {
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 0.75rem !important;
+  flex-shrink: 0;
+}
+
+/* Item Name Styling */
+.sidebar .sub-nav .nav-link .item-name {
+  flex-grow: 1 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Badge Styling */
+.sidebar .sub-nav .nav-link .badge {
+  font-size: 0.65rem !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  margin-left: 0.5rem !important;
+  flex-shrink: 0;
+  min-width: fit-content;
+}
+
+/* Enhanced Badge Colors */
+.sidebar .sub-nav .nav-link .badge.bg-success {
+  background: linear-gradient(45deg, #28a745, #20c997) !important;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+}
+
+.sidebar .sub-nav .nav-link .badge.bg-primary {
+  background: linear-gradient(45deg, #007bff, #6610f2) !important;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.sidebar .sub-nav .nav-link .badge.bg-info {
+  background: linear-gradient(45deg, #17a2b8, #6f42c1) !important;
+  box-shadow: 0 2px 4px rgba(23, 162, 184, 0.3);
+}
+
+/* Smooth Animation for Sidebar Toggle */
+.sidebar .sub-nav {
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Mini Sidebar Adjustments */
+.sidebar-mini .sub-nav .nav-link {
+  padding-left: 1rem !important;
+  justify-content: center !important;
+}
+
+.sidebar-mini .sub-nav .nav-link .item-name,
+.sidebar-mini .sub-nav .nav-link .badge {
+  display: none !important;
+}
+
+.sidebar-mini .sub-nav .nav-link .icon {
+  margin-right: 0 !important;
+}
+
+/* Responsive Improvements */
+@media (max-width: 1199.98px) {
+  .sidebar .sub-nav .nav-link {
+    padding: 0.625rem 1rem !important;
+  }
+  
+  .sidebar .sub-nav .nav-link .item-name {
+    font-size: 0.8rem !important;
+  }
+  
+  .sidebar .sub-nav .nav-link .badge {
+    font-size: 0.6rem !important;
+    padding: 0.2rem 0.4rem !important;
+  }
+}
+
+/* Accessibility Improvements */
+.sidebar .sub-nav .nav-link:focus {
+  outline: 2px solid var(--bs-primary) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25) !important;
+}
+
+/* Category Headers for Better Organization */
+.radiology-nav-category {
+  color: var(--bs-secondary) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 0.75rem 1rem 0.5rem 2.5rem !important;
+  margin: 0.75rem 0 0.25rem 0 !important;
+  background: rgba(0,0,0,0.02) !important;
+  border-left: 3px solid var(--bs-primary) !important;
+  position: relative;
+}
+
+.radiology-nav-category::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(45deg, var(--bs-primary), var(--bs-info));
+}
+
+/* Navigation Dividers */
+.sidebar .sub-nav .nav-divider {
+  margin: 0.5rem 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.sidebar .sub-nav .nav-divider:first-child .radiology-nav-category {
+  margin-top: 0 !important;
+}

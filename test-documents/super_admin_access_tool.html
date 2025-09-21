@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard Access Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-success {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            color: white;
+        }
+        .btn-warning {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+        }
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .status-panel {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+        }
+        .log-output {
+            background: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+        .info { color: #17a2b8; }
+        .step {
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        .config-panel {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Super Admin Dashboard Access Tool</h1>
+        
+        <div class="config-panel">
+            <h3>📋 Configuration</h3>
+            <div>
+                <label>Backend URL: </label>
+                <input type="text" id="backendUrl" value="http://localhost:8000" style="width: 200px; padding: 5px;">
+            </div>
+            <div style="margin-top: 10px;">
+                <label>Frontend URL: </label>
+                <input type="text" id="frontendUrl" value="http://localhost:5173" style="width: 200px; padding: 5px;">
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="testBackendConnection()">
+                🔍 Test Backend Connection
+            </button>
+            <button class="btn-success" onclick="loginSuperAdmin()">
+                🔑 Login as Super Admin
+            </button>
+            <button class="btn-warning" onclick="checkAuthStatus()">
+                📊 Check Auth Status
+            </button>
+            <button class="btn-danger" onclick="clearAuthData()">
+                🧹 Clear Auth Data
+            </button>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="openAdminDashboard()">
+                🚀 Open Admin Dashboard
+            </button>
+            <button class="btn-success" onclick="openLoginPage()">
+                📝 Open Login Page
+            </button>
+            <button class="btn-warning" onclick="testDashboardAPI()">
+                🧪 Test Dashboard API
+            </button>
+            <button class="btn-danger" onclick="fixAuthIssues()">
+                🔧 Auto-Fix Auth Issues
+            </button>
+        </div>
+
+        <div class="status-panel">
+            <h3>📈 Current Status</h3>
+            <div id="statusDisplay">
+                <p>🔄 Ready to test authentication...</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>📚 Step-by-Step Guide:</h4>
+            <ol>
+                <li>Click "Test Backend Connection" to ensure backend is running</li>
+                <li>Click "Login as Super Admin" to authenticate</li>
+                <li>Click "Check Auth Status" to verify login</li>
+                <li>Click "Open Admin Dashboard" to access the dashboard</li>
+            </ol>
+        </div>
+
+        <div class="log-output" id="logOutput">
+            🏁 System initialized. Ready for testing...\n
+        </div>
+    </div>
+
+    <script>
+        const superAdminCredentials = {
+            email: 'mastermind@xerxez.com',
+            password: 'Tanzilla@tanzeem786'
+        };
+
+        function log(message, type = 'info') {
+            const output = document.getElementById('logOutput');
+            const timestamp = new Date().toLocaleTimeString();
+            const typeEmoji = {
+                'success': '✅',
+                'error': '❌',
+                'warning': '⚠️',
+                'info': 'ℹ️'
+            };
+            
+            output.innerHTML += `${timestamp} ${typeEmoji[type]} ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function updateStatus(message) {
+            document.getElementById('statusDisplay').innerHTML = `<p>${message}</p>`;
+        }
+
+        function getBackendUrl() {
+            return document.getElementById('backendUrl').value;
+        }
+
+        function getFrontendUrl() {
+            return document.getElementById('frontendUrl').value;
+        }
+
+        async function testBackendConnection() {
+            log('🔍 Testing backend connection...', 'info');
+            updateStatus('🔄 Testing backend connection...');
+            
+            try {
+                const response = await fetch(`${getBackendUrl()}/api/auth/login/`, {
+                    method: 'OPTIONS'
+                });
+                
+                if (response.ok || response.status === 405) {
+                    log('✅ Backend is responding correctly', 'success');
+                    updateStatus('✅ Backend connection successful');
+                } else {
+                    log(`⚠️ Backend responded with status: ${response.status}`, 'warning');
+                    updateStatus('⚠️ Backend connection issues detected');
+                }
+            } catch (error) {
+                log(`❌ Backend connection failed: ${error.message}`, 'error');
+                updateStatus('❌ Backend is not accessible');
+            }
+        }
+
+        async function loginSuperAdmin() {
+            log('🔑 Attempting super admin login...', 'info');
+            updateStatus('🔄 Logging in as super admin...');
+            
+            try {
+                const response = await fetch(`${getBackendUrl()}/api/auth/login/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(superAdminCredentials)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Store authentication data
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('isAuthenticated', 'true');
+                    localStorage.setItem('access_token', data.token);
+                    
+                    // Also store in session storage as fallback
+                    sessionStorage.setItem('user', JSON.stringify(data.user));
+                    sessionStorage.setItem('isAuthenticated', 'true');
+                    
+                    log('✅ Super admin login successful!', 'success');
+                    log(`👤 User: ${data.user.username} (${data.user.email})`, 'info');
+                    log(`🔐 Role: ${data.user.role}`, 'info');
+                    log(`⭐ Superuser: ${data.user.is_superuser}`, 'info');
+                    
+                    updateStatus('✅ Super admin authenticated successfully');
+                    
+                } else {
+                    log(`❌ Login failed: ${data.message || 'Unknown error'}`, 'error');
+                    updateStatus('❌ Login failed');
+                }
+            } catch (error) {
+                log(`❌ Login error: ${error.message}`, 'error');
+                updateStatus('❌ Login request failed');
+            }
+        }
+
+        function checkAuthStatus() {
+            log('📊 Checking authentication status...', 'info');
+            
+            const user = localStorage.getItem('user');
+            const token = localStorage.getItem('token');
+            const isAuthenticated = localStorage.getItem('isAuthenticated');
+            
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    log('✅ Authentication data found:', 'success');
+                    log(`   📧 Email: ${userData.email}`, 'info');
+                    log(`   👤 Username: ${userData.username}`, 'info');
+                    log(`   🏷️ Role: ${userData.role}`, 'info');
+                    log(`   🔐 Is Superuser: ${userData.is_superuser}`, 'info');
+                    log(`   👔 Is Staff: ${userData.is_staff}`, 'info');
+                    log(`   🎯 Token: ${token ? 'Present' : 'Missing'}`, 'info');
+                    log(`   ✅ Authenticated: ${isAuthenticated}`, 'info');
+                    
+                    updateStatus('✅ User is authenticated as super admin');
+                } catch (error) {
+                    log(`❌ Invalid user data in storage: ${error.message}`, 'error');
+                    updateStatus('❌ Corrupted authentication data');
+                }
+            } else {
+                log('❌ No authentication data found', 'error');
+                updateStatus('❌ User is not authenticated');
+            }
+        }
+
+        function clearAuthData() {
+            log('🧹 Clearing all authentication data...', 'warning');
+            
+            // Clear localStorage
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            localStorage.removeItem('isAuthenticated');
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            
+            // Clear sessionStorage
+            sessionStorage.clear();
+            
+            log('✅ All authentication data cleared', 'success');
+            updateStatus('🧹 Authentication data cleared');
+        }
+
+        function openAdminDashboard() {
+            const dashboardUrl = `${getFrontendUrl()}/admin/dashboard`;
+            log(`🚀 Opening admin dashboard: ${dashboardUrl}`, 'info');
+            window.open(dashboardUrl, '_blank');
+            updateStatus('🚀 Admin dashboard opened in new tab');
+        }
+
+        function openLoginPage() {
+            const loginUrl = `${getFrontendUrl()}/login`;
+            log(`📝 Opening login page: ${loginUrl}`, 'info');
+            window.open(loginUrl, '_blank');
+            updateStatus('📝 Login page opened in new tab');
+        }
+
+        async function testDashboardAPI() {
+            log('🧪 Testing dashboard API endpoint...', 'info');
+            updateStatus('🔄 Testing dashboard API...');
+            
+            const token = localStorage.getItem('token');
+            if (!token) {
+                log('❌ No authentication token found. Please login first.', 'error');
+                updateStatus('❌ Authentication required');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${getBackendUrl()}/api/admin/dashboard/overview/`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log('✅ Dashboard API is accessible', 'success');
+                    log(`📊 Response: ${JSON.stringify(data, null, 2)}`, 'info');
+                    updateStatus('✅ Dashboard API working correctly');
+                } else {
+                    log(`⚠️ Dashboard API responded with status: ${response.status}`, 'warning');
+                    updateStatus('⚠️ Dashboard API access issues');
+                }
+            } catch (error) {
+                log(`❌ Dashboard API test failed: ${error.message}`, 'error');
+                updateStatus('❌ Dashboard API not accessible');
+            }
+        }
+
+        async function fixAuthIssues() {
+            log('🔧 Running auto-fix for authentication issues...', 'info');
+            updateStatus('🔄 Auto-fixing authentication issues...');
+            
+            // Step 1: Test backend connection
+            await testBackendConnection();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Step 2: Clear any corrupted auth data
+            clearAuthData();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Step 3: Login as super admin
+            await loginSuperAdmin();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Step 4: Verify authentication
+            checkAuthStatus();
+            
+            log('🔧 Auto-fix process completed', 'success');
+            updateStatus('🔧 Auto-fix completed - ready to access dashboard');
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            log('🏁 Super Admin Dashboard Access Tool loaded', 'success');
+            log('💡 Use the buttons above to test and fix authentication', 'info');
+            updateStatus('🏁 Tool ready - click "Auto-Fix Auth Issues" for quick setup');
+        };
+    </script>
+</body>
+</html>

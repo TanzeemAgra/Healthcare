@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureNeat Direct Access</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        .logo { font-size: 4em; margin-bottom: 20px; }
+        h1 { color: #333; margin-bottom: 10px; }
+        .subtitle { color: #666; margin-bottom: 30px; }
+        .btn { 
+            display: inline-block;
+            padding: 15px 30px; 
+            margin: 10px; 
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-decoration: none;
+            color: white;
+        }
+        .btn-secondary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        .status { 
+            background: #d4edda; 
+            color: #155724; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+        .feature-list {
+            text-align: left;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .feature-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .feature-list li {
+            margin: 8px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🏥</div>
+        <h1>SecureNeat Platform</h1>
+        <p class="subtitle">Medical Learning & AI Assistant</p>
+        
+        <div class="status">
+            <strong>✅ Direct Access Enabled</strong><br>
+            No subscription or authentication required
+        </div>
+
+        <div class="feature-list">
+            <h4>🎯 Available Features:</h4>
+            <ul>
+                <li>🤖 Dr. Max AI Chatbot - Medical Q&A</li>
+                <li>📊 Interactive Dashboard</li>
+                <li>📝 MCQ Practice - Interactive Quizzes</li>
+                <li>🎭 OSCE Scenarios - Clinical Skills Practice</li>
+                <li>👤 User Profile Management</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="http://localhost:5173/SecureNeat/dashboard" class="btn">
+                🎯 Open Dashboard
+            </a>
+            <a href="http://localhost:5173/SecureNeat/chat" class="btn btn-secondary">
+                🤖 Start AI Chat
+            </a>
+        </div>
+        
+        <div style="margin-top: 15px;">
+            <a href="http://localhost:5173/SecureNeat/mcq-practice" class="btn btn-secondary">
+                📝 MCQ Practice
+            </a>
+            <a href="http://localhost:5173/SecureNeat/osce-scenario" class="btn btn-secondary">
+                🎭 OSCE Scenarios
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <small style="color: #999;">
+                SecureNeat v2.0 - Restructured for Direct Access<br>
+                No subscription gates or authentication barriers
+            </small>
+        </div>
+    </div>
+
+    <script>
+        // Auto-clear any existing authentication issues
+        console.log('🔧 SecureNeat Direct Access - Clearing any auth barriers...');
+        
+        // Clear any problematic localStorage items
+        const itemsToRemove = [
+            'subscriptionStatus',
+            'subscriptionRequired',
+            'accessDenied'
+        ];
+        
+        itemsToRemove.forEach(item => {
+            if (localStorage.getItem(item)) {
+                localStorage.removeItem(item);
+                console.log(`Cleared: ${item}`);
+            }
+        });
+        
+        // Set positive access flags
+        localStorage.setItem('directAccess', 'true');
+        localStorage.setItem('secureNeatAccess', 'granted');
+        
+        console.log('✅ Direct access configured successfully');
+    </script>
+</body>
+</html>

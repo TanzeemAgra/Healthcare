@@ -1,0 +1,140 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="medicalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.7" />
+    </linearGradient>
+    <radialGradient id="pulseGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Transparent Background with Gradient -->
+  <rect width="1600" height="900" fill="url(#medicalGradient)" opacity="0.3"/>
+  
+  <!-- DNA Helix Pattern -->
+  <g opacity="0.1">
+    <path d="M0 450 Q200 300 400 450 Q600 600 800 450 Q1000 300 1200 450 Q1400 600 1600 450" stroke="white" stroke-width="3" fill="none" />
+    <path d="M0 480 Q200 630 400 480 Q600 330 800 480 Q1000 630 1200 480 Q1400 330 1600 480" stroke="white" stroke-width="3" fill="none" />
+  </g>
+  
+  <!-- Doctor Silhouette (repositioned and scaled) -->
+  <g transform="translate(1100, 150)">
+    <!-- Doctor Figure -->
+    <ellipse cx="100" cy="600" rx="80" ry="30" fill="rgba(255,255,255,0.2)" />
+    
+    <!-- Body -->
+    <rect x="70" y="300" width="80" height="300" fill="rgba(255,255,255,0.85)" rx="40" />
+    
+    <!-- Head -->
+    <circle cx="110" cy="180" r="60" fill="rgba(255,255,255,0.85)" />
+    
+    <!-- Stethoscope -->
+    <path d="M80 210 Q65 225 65 240 L65 270" stroke="#3b82f6" stroke-width="4" fill="none" />
+    <path d="M140 210 Q155 225 155 240 L155 270" stroke="#3b82f6" stroke-width="4" fill="none" />
+    <circle cx="58" cy="278" r="12" fill="#3b82f6" />
+    <circle cx="162" cy="278" r="12" fill="#3b82f6" />
+    <path d="M65 270 Q110 285 155 270" stroke="#3b82f6" stroke-width="4" fill="none" />
+    
+    <!-- Lab Coat -->
+    <rect x="60" y="240" width="100" height="210" fill="rgba(255,255,255,0.9)" rx="20" />
+    
+    <!-- Arms -->
+    <rect x="25" y="270" width="35" height="120" fill="rgba(255,255,255,0.85)" rx="17" />
+    <rect x="160" y="270" width="35" height="120" fill="rgba(255,255,255,0.85)" rx="17" />
+  </g>
+  
+  <!-- Medical Icons Grid -->
+  <g transform="translate(150, 200)">
+    <!-- Heartbeat Monitor -->
+    <rect x="0" y="0" width="200" height="120" fill="rgba(255,255,255,0.7)" rx="10" stroke="rgba(59,130,246,0.8)" stroke-width="3"/>
+    <path d="M20 60 L50 60 L70 20 L90 100 L110 20 L130 60 L180 60" stroke="#ef4444" stroke-width="4" fill="none"/>
+    
+    <!-- Medical Cross -->
+    <g transform="translate(250, 20)">
+      <rect x="-30" y="-8" width="60" height="16" fill="rgba(220,38,38,0.8)" rx="8"/>
+      <rect x="-8" y="-30" width="16" height="60" fill="rgba(220,38,38,0.8)" rx="8"/>
+    </g>
+    
+    <!-- Hospital Building -->
+    <g transform="translate(350, 0)">
+      <rect x="0" y="30" width="120" height="90" fill="rgba(255,255,255,0.7)" rx="10" stroke="rgba(59,130,246,0.8)" stroke-width="2"/>
+      <rect x="50" y="0" width="20" height="30" fill="rgba(220,38,38,0.8)"/>
+      <rect x="20" y="50" width="80" height="8" fill="rgba(59,130,246,0.9)"/>
+      <rect x="55" y="40" width="10" height="30" fill="rgba(59,130,246,0.9)"/>
+    </g>
+    
+    <!-- Pills -->
+    <g transform="translate(520, 40)">
+      <ellipse cx="0" cy="0" rx="25" ry="15" fill="rgba(16,185,129,0.8)"/>
+      <ellipse cx="60" cy="0" rx="15" ry="25" fill="rgba(239,68,68,0.8)"/>
+      <circle cx="120" cy="0" r="20" fill="rgba(59,130,246,0.8)"/>
+    </g>
+  </g>
+  
+  <!-- AI/Technology Elements -->
+  <g transform="translate(200, 500)">
+    <!-- Brain/AI Symbol -->
+    <circle cx="100" cy="100" r="80" fill="rgba(139,92,246,0.3)" stroke="rgba(139,92,246,0.7)" stroke-width="3"/>
+    <path d="M60 80 Q80 60 100 80 Q120 60 140 80" stroke="rgba(139,92,246,0.8)" stroke-width="3" fill="none"/>
+    <path d="M60 100 Q80 120 100 100 Q120 120 140 100" stroke="rgba(139,92,246,0.8)" stroke-width="3" fill="none"/>
+    <circle cx="80" cy="85" r="5" fill="rgba(139,92,246,0.9)"/>
+    <circle cx="120" cy="85" r="5" fill="rgba(139,92,246,0.9)"/>
+    <circle cx="80" cy="115" r="5" fill="rgba(139,92,246,0.9)"/>
+    <circle cx="120" cy="115" r="5" fill="rgba(139,92,246,0.9)"/>
+    
+    <!-- Data Visualization -->
+    <g transform="translate(250, 50)">
+      <rect x="0" y="50" width="15" height="50" fill="rgba(16,185,129,0.7)"/>
+      <rect x="25" y="30" width="15" height="70" fill="rgba(59,130,246,0.7)"/>
+      <rect x="50" y="40" width="15" height="60" fill="rgba(239,68,68,0.7)"/>
+      <rect x="75" y="20" width="15" height="80" fill="rgba(139,92,246,0.7)"/>
+      <rect x="100" y="35" width="15" height="65" fill="rgba(245,158,11,0.7)"/>
+    </g>
+  </g>
+  
+  <!-- Floating Medical Symbols -->
+  <g opacity="0.4">
+    <!-- Medical Cross 1 -->
+    <g transform="translate(800, 100)">
+      <rect x="-15" y="-4" width="30" height="8" fill="rgba(220,38,38,0.6)" rx="4"/>
+      <rect x="-4" y="-15" width="8" height="30" fill="rgba(220,38,38,0.6)" rx="4"/>
+    </g>
+    
+    <!-- Medical Cross 2 -->
+    <g transform="translate(1300, 700)">
+      <rect x="-20" y="-5" width="40" height="10" fill="rgba(220,38,38,0.6)" rx="5"/>
+      <rect x="-5" y="-20" width="10" height="40" fill="rgba(220,38,38,0.6)" rx="5"/>
+    </g>
+    
+    <!-- Heart -->
+    <g transform="translate(400, 150)">
+      <path d="M0,15 C0,10 5,5 12,5 C20,5 25,10 25,15 C25,25 12,35 12,35 C12,35 0,25 0,15 Z" fill="rgba(239,68,68,0.6)"/>
+    </g>
+    
+    <!-- Stethoscope Mini -->
+    <g transform="translate(1200, 300)">
+      <path d="M0,0 Q8,8 16,0 Q24,8 32,0" stroke="rgba(59,130,246,0.6)" stroke-width="2" fill="none"/>
+      <circle cx="0" cy="0" r="4" fill="rgba(59,130,246,0.6)"/>
+      <circle cx="32" cy="0" r="4" fill="rgba(59,130,246,0.6)"/>
+    </g>
+  </g>
+  
+  <!-- Pulse Animation Circles -->
+  <circle cx="800" cy="300" r="60" fill="url(#pulseGradient)" opacity="0.3">
+    <animate attributeName="r" values="60;120;60" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.05;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="1200" cy="600" r="40" fill="url(#pulseGradient)" opacity="0.25">
+    <animate attributeName="r" values="40;80;40" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.25;0.05;0.25" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Heartbeat Line (Extended) -->
+  <g transform="translate(0, 450)" opacity="0.4">
+    <path d="M0,0 L300,0 L330,-45 L360,90 L390,-60 L420,0 L1600,0" 
+          stroke="rgba(239,68,68,0.7)" stroke-width="4" fill="none"/>
+  </g>
+</svg>

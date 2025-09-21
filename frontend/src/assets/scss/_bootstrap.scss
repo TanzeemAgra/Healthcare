@@ -1,0 +1,30 @@
+@use "sass:math";
+@use "sass:color";
+@use "sass:map";
+@use "sass:list";
+
+// Import Bootstrap source files FIRST (but skip problematic ones)
+@forward "bootstrap/scss/functions";
+// @forward "bootstrap/scss/variables";  // Commented out due to _assert-ascending issues
+// @forward "bootstrap/scss/maps";  // Commented out due to $theme-colors variable dependency
+@forward "bootstrap/scss/mixins";
+// @forward "bootstrap/scss/utilities";  // Commented out due to $prefix dependency
+
+// Optional Bootstrap components
+@forward "bootstrap/scss/root";
+@forward "bootstrap/scss/reboot";
+@forward "bootstrap/scss/type";
+@forward "bootstrap/scss/grid";
+@forward "bootstrap/scss/containers";
+@forward "bootstrap/scss/forms";
+@forward "bootstrap/scss/buttons";
+@forward "bootstrap/scss/nav";
+@forward "bootstrap/scss/navbar";
+@forward "bootstrap/scss/card";
+@forward "bootstrap/scss/alert";
+@forward "bootstrap/scss/list-group";
+@forward "bootstrap/scss/close";
+@forward "bootstrap/scss/modal";
+@forward "bootstrap/scss/tooltip";
+@forward "bootstrap/scss/popover";
+@forward "bootstrap/scss/helpers";

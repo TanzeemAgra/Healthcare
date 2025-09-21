@@ -1,0 +1,108 @@
+// Import Bootstrap base
+@use "./_bootstrap" as *;
+
+// Import our variables and overrides
+@use "./_variables" as *;
+@use "bootstrap/scss/variables" as bootstrap-vars;
+@use "bootstrap/scss/mixins" as bootstrap-mixins;
+
+// Import our variables
+@use "./_variables" as *;
+
+// Import Bootstrap components
+@use "bootstrap/scss/bootstrap" as *;
+
+/* Custom Variables */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+// Global Styles
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Dark Mode Styles
+.dark-mode {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+}
+
+// Landing Page Styles
+.landing-page {
+  .hero-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+  }
+}
+
+// Form Styles
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+// Button Styles
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  &:hover {
+    background-color: darken(#007bff, 10%);
+    border-color: darken(#007bff, 12%);
+  }
+}
+
+// Card Styles
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+// Navigation Styles
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Utility Classes
+.text-primary { color: var(--primary-color) !important; }
+.bg-primary { background-color: var(--primary-color) !important; }
+
+// Responsive Styles
+@media (max-width: 768px) {
+  .hero-section {
+    text-align: center;
+    padding: 2rem 0;
+  }
+}
+
+// Animation Classes
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}

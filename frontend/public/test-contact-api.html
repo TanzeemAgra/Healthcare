@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form Test</title>
+</head>
+<body>
+    <h1>Contact Form API Test</h1>
+    <button onclick="testContactAPI()">Test Contact API</button>
+    <div id="result"></div>
+
+    <script>
+    async function testContactAPI() {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = 'Testing...';
+        
+        const testData = {
+            name: 'Test User',
+            email: 'test@example.com',
+            phone: '+1-555-0123',
+            department: 'General Inquiry',
+            country: 'USA',
+            contactMethod: 'Email',
+            subject: 'API Test Contact Form',
+            message: 'This is a test message from the contact form API test page.',
+            newsletter: true
+        };
+        
+        try {
+            console.log('Testing endpoint: http://localhost:8000/api/hospital/contact/submit/');
+            console.log('Test data:', testData);
+            
+            const response = await fetch('http://localhost:8000/api/hospital/contact/submit/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(testData)
+            });
+            
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            
+            const result = await response.json();
+            console.log('Response data:', result);
+            
+            if (response.ok) {
+                resultDiv.innerHTML = `
+                    <h3 style="color: green;">✅ SUCCESS!</h3>
+                    <p><strong>Status:</strong> ${response.status}</p>
+                    <p><strong>Message:</strong> ${result.message}</p>
+                    <p><strong>Admin notification sent:</strong> ${result.admin_notification_sent}</p>
+                    <p><strong>User confirmation sent:</strong> ${result.user_confirmation_sent}</p>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <h3 style="color: red;">❌ FAILED!</h3>
+                    <p><strong>Status:</strong> ${response.status}</p>
+                    <p><strong>Error:</strong> ${result.error || 'Unknown error'}</p>
+                `;
+            }
+        } catch (error) {
+            console.error('Test failed:', error);
+            resultDiv.innerHTML = `
+                <h3 style="color: red;">❌ ERROR!</h3>
+                <p><strong>Error:</strong> ${error.message}</p>
+                <p>Check the console for more details.</p>
+            `;
+        }
+    }
+    </script>
+</body>
+</html>

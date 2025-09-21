@@ -1,0 +1,3 @@
+@use "../bootstrap/variables" as variables;
+
+$grid-breakpoints: variables.$grid-breakpoints !default;

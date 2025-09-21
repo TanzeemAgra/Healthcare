@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Login Simulator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .card { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        button { padding: 12px 24px; margin: 10px 5px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0056b3; }
+        button.success { background: #28a745; }
+        button.danger { background: #dc3545; }
+        .status { padding: 15px; margin: 10px 0; border-radius: 5px; font-weight: bold; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 12px; }
+        .step { background: #fff; border-left: 4px solid #007bff; padding: 15px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔐 Super Admin Login Simulator</h1>
+    <p>This tool simulates the complete super admin authentication process for SecureNeat access.</p>
+    
+    <div class="card">
+        <h3>Authentication Status</h3>
+        <div id="auth-status" class="status info">Checking authentication...</div>
+        <button onclick="checkAuth()">🔍 Check Current Status</button>
+        <button onclick="clearAuth()" class="danger">🗑️ Clear All Auth</button>
+    </div>
+    
+    <div class="card">
+        <h3>Super Admin Simulation</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Simulate Django Backend Authentication
+            <br><button onclick="simulateBackendAuth()" class="success">✅ Set Backend Tokens</button>
+        </div>
+        
+        <div class="step">
+            <strong>Step 2:</strong> Set Super Admin User Data
+            <br><button onclick="setUserData()" class="success">👤 Set Super Admin User</button>
+        </div>
+        
+        <div class="step">
+            <strong>Step 3:</strong> Set ProtectedRoute Flag
+            <br><button onclick="setProtectedRouteFlag()" class="success">🛡️ Set Super Admin Flag</button>
+        </div>
+        
+        <div class="step">
+            <strong>Step 4:</strong> Complete Setup
+            <br><button onclick="completeSetup()" class="success">🚀 Complete Full Setup</button>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>Navigation</h3>
+        <button onclick="openSecureNeat()">🎯 Open SecureNeat Dashboard</button>
+        <button onclick="openHome()">🏠 Open Home Page</button>
+        <button onclick="openTest()">🧪 Open Auth Test</button>
+    </div>
+    
+    <div class="card">
+        <h3>Storage Contents</h3>
+        <pre id="storage-display"></pre>
+    </div>
+    
+    <div class="card">
+        <h3>Console Log</h3>
+        <pre id="console-log"></pre>
+    </div>
+
+    <script>
+        let logs = [];
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${message}`);
+            updateConsoleLog();
+            console.log(message);
+        }
+        
+        function updateConsoleLog() {
+            document.getElementById('console-log').textContent = logs.slice(-15).join('\n');
+        }
+        
+        function updateStorageDisplay() {
+            const storage = {
+                localStorage: Object.fromEntries(Object.entries(localStorage)),
+                sessionStorage: Object.fromEntries(Object.entries(sessionStorage))
+            };
+            document.getElementById('storage-display').textContent = JSON.stringify(storage, null, 2);
+        }
+        
+        function updateAuthStatus(message, type = 'info') {
+            const statusEl = document.getElementById('auth-status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+        
+        function checkAuth() {
+            log('=== CHECKING AUTHENTICATION STATUS ===');
+            
+            // Check super admin flag
+            const superAdminFlag = localStorage.getItem('superAdminDetected');
+            log(`Super Admin Flag: ${superAdminFlag}`);
+            
+            // Check user data
+            const userStr = localStorage.getItem('user');
+            let user = null;
+            try {
+                user = userStr ? JSON.parse(userStr) : null;
+                log(`User Data: ${user ? user.email + ' (' + user.role + ')' : 'None'}`);
+            } catch (e) {
+                log(`Error parsing user: ${e.message}`);
+            }
+            
+            // Check tokens
+            const accessToken = localStorage.getItem('access_token') || localStorage.getItem('token');
+            const refreshToken = localStorage.getItem('refresh_token') || localStorage.getItem('refreshToken');
+            log(`Access Token: ${accessToken ? 'Present' : 'Missing'}`);
+            log(`Refresh Token: ${refreshToken ? 'Present' : 'Missing'}`);
+            
+            // Determine status
+            if (superAdminFlag === 'true' && user && user.role === 'super_admin') {
+                updateAuthStatus('✅ Super Admin Fully Authenticated', 'success');
+                log('✅ Super admin authentication complete');
+            } else if (user && user.role === 'super_admin') {
+                updateAuthStatus('⚠️ Super Admin User Present, Missing Flag', 'info');
+                log('⚠️ Super admin user found but flag missing');
+            } else if (superAdminFlag === 'true') {
+                updateAuthStatus('⚠️ Super Admin Flag Present, Missing User', 'info');
+                log('⚠️ Super admin flag found but user missing');
+            } else {
+                updateAuthStatus('❌ No Super Admin Authentication', 'error');
+                log('❌ No super admin authentication detected');
+            }
+            
+            updateStorageDisplay();
+        }
+        
+        function clearAuth() {
+            log('=== CLEARING ALL AUTHENTICATION ===');
+            localStorage.clear();
+            sessionStorage.clear();
+            logs = [];
+            updateAuthStatus('All authentication cleared', 'info');
+            updateStorageDisplay();
+            updateConsoleLog();
+            log('Authentication cleared - fresh start');
+        }
+        
+        function simulateBackendAuth() {
+            log('=== SIMULATING BACKEND AUTHENTICATION ===');
+            
+            // Simulate Django session tokens
+            localStorage.setItem('access_token', 'fake-jwt-access-token-' + Date.now());
+            localStorage.setItem('refresh_token', 'fake-jwt-refresh-token-' + Date.now());
+            localStorage.setItem('token', 'legacy-token-' + Date.now());
+            
+            log('✅ Backend authentication tokens set');
+            updateStorageDisplay();
+        }
+        
+        function setUserData() {
+            log('=== SETTING SUPER ADMIN USER DATA ===');
+            
+            const superAdminUser = {
+                id: 1,
+                email: 'mastermind@xerxez.in',
+                username: 'mastermind@xerxez.in',
+                full_name: 'Super Administrator',
+                role: 'super_admin',
+                is_superuser: true,
+                is_staff: true,
+                permissions: {
+                    can_manage_users: true,
+                    can_view_financial_data: true,
+                    can_handle_emergencies: true,
+                    can_access_medical_records: true,
+                    can_manage_inventory: true,
+                    can_view_analytics: true,
+                    can_manage_system: true,
+                    can_export_data: true,
+                    can_manage_permissions: true,
+                    can_delete_records: true
+                }
+            };
+            
+            localStorage.setItem('user', JSON.stringify(superAdminUser));
+            
+            log('✅ Super admin user data set');
+            updateStorageDisplay();
+        }
+        
+        function setProtectedRouteFlag() {
+            log('=== SETTING PROTECTED ROUTE FLAG ===');
+            
+            localStorage.setItem('superAdminDetected', 'true');
+            sessionStorage.setItem('superAdminDetected', 'true');
+            
+            log('✅ Super admin detection flag set');
+            updateStorageDisplay();
+        }
+        
+        function completeSetup() {
+            log('=== RUNNING COMPLETE SUPER ADMIN SETUP ===');
+            
+            clearAuth();
+            setTimeout(() => {
+                simulateBackendAuth();
+                setTimeout(() => {
+                    setUserData();
+                    setTimeout(() => {
+                        setProtectedRouteFlag();
+                        setTimeout(() => {
+                            checkAuth();
+                            log('🚀 Complete super admin setup finished!');
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }
+        
+        function openSecureNeat() {
+            log('Opening SecureNeat dashboard...');
+            window.open('http://localhost:5173/SecureNeat/dashboard', '_blank');
+        }
+        
+        function openHome() {
+            log('Opening home page...');
+            window.open('http://localhost:5173/', '_blank');
+        }
+        
+        function openTest() {
+            log('Opening authentication test...');
+            window.open('http://localhost:5173/test-secureneat-auth.html', '_blank');
+        }
+        
+        // Initialize
+        log('Super Admin Login Simulator initialized');
+        checkAuth();
+    </script>
+</body>
+</html>

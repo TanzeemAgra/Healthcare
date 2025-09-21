@@ -1,0 +1,1 @@
+import React from 'react'; const PathologyOrders = () => { return <div>Pathology Orders</div>; }; export default PathologyOrders;

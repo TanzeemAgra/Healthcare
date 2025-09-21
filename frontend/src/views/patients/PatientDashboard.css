@@ -1,0 +1,325 @@
+.patient-dashboard {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.patient-dashboard h2 {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.patient-dashboard .card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.patient-dashboard .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.patient-dashboard .card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px 12px 0 0 !important;
+  border: none;
+  padding: 15px 20px;
+}
+
+.patient-dashboard .card-header h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Statistics Cards */
+.patient-dashboard .stat-card {
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.patient-dashboard .stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.patient-dashboard .stat-card .card-body {
+  padding: 20px;
+}
+
+.patient-dashboard .stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.patient-dashboard .stat-icon.bg-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.patient-dashboard .stat-icon.bg-info {
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+}
+
+.patient-dashboard .stat-icon.bg-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.patient-dashboard .stat-icon.bg-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+}
+
+.patient-dashboard .stat-icon.bg-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%);
+}
+
+/* Tables */
+.patient-dashboard .table {
+  margin-bottom: 0;
+}
+
+.patient-dashboard .table th {
+  background-color: #f8f9fa;
+  border-top: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 12px;
+}
+
+.patient-dashboard .table td {
+  padding: 12px;
+  vertical-align: middle;
+  border-color: #e9ecef;
+}
+
+.patient-dashboard .table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Activity Timeline */
+.patient-dashboard .activity-timeline {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.patient-dashboard .activity-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.patient-dashboard .activity-item:last-child {
+  border-bottom: none;
+}
+
+.patient-dashboard .activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.patient-dashboard .activity-content {
+  flex: 1;
+}
+
+.patient-dashboard .activity-content p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Quick Actions */
+.patient-dashboard .quick-action-card {
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.patient-dashboard .quick-action-card:hover {
+  border-color: #667eea;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+}
+
+.patient-dashboard .quick-action-card h6 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.patient-dashboard .quick-action-card p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Badges */
+.patient-dashboard .badge {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Buttons */
+.patient-dashboard .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.patient-dashboard .btn-primary:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.patient-dashboard .btn-outline-primary {
+  border-color: #667eea;
+  color: #667eea;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.patient-dashboard .btn-outline-primary:hover {
+  background-color: #667eea;
+  border-color: #667eea;
+  transform: translateY(-1px);
+}
+
+/* Alerts */
+.patient-dashboard .alert {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+/* Loading state */
+.patient-dashboard .spinner-border {
+  color: #667eea;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .patient-dashboard {
+    padding: 10px 0;
+  }
+
+  .patient-dashboard .stat-card .card-body {
+    padding: 15px;
+  }
+
+  .patient-dashboard .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .patient-dashboard .quick-action-card {
+    height: 100px;
+    margin-bottom: 15px;
+  }
+
+  .patient-dashboard .activity-timeline {
+    max-height: 300px;
+  }
+
+  .patient-dashboard .table-responsive {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .patient-dashboard .card-header {
+    padding: 12px 15px;
+  }
+
+  .patient-dashboard .card-body {
+    padding: 15px;
+  }
+
+  .patient-dashboard .stat-card .card-body {
+    padding: 12px;
+  }
+
+  .patient-dashboard h2 {
+    font-size: 1.5rem;
+  }
+
+  .patient-dashboard .quick-action-card h6 {
+    font-size: 0.9rem;
+  }
+
+  .patient-dashboard .quick-action-card p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Animation for loading and transitions */
+.patient-dashboard .fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar for activity timeline */
+.patient-dashboard .activity-timeline::-webkit-scrollbar {
+  width: 6px;
+}
+
+.patient-dashboard .activity-timeline::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.patient-dashboard .activity-timeline::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.patient-dashboard .activity-timeline::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Empty state styling */
+.patient-dashboard .text-center .text-muted {
+  color: #6c757d !important;
+}
+
+.patient-dashboard .text-center p.text-muted {
+  font-size: 0.9rem;
+  margin-top: 8px;
+}

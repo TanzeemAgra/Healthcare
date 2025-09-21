@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Radio Button Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .custom-radio-container {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .custom-radio-container:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .custom-radio-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 3px solid #667eea;
+            margin-right: 12px;
+            position: relative;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .custom-radio-circle.checked {
+            background-color: #667eea;
+        }
+        
+        .custom-radio-circle.checked::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .custom-radio-container:hover .custom-radio-circle {
+            border-color: #5a6fd8;
+            transform: scale(1.1);
+        }
+        
+        label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin: 20px 0;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e8;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        h1 {
+            color: #495057;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎯 Contact Form Radio Button Test</h1>
+        
+        <h3>Preferred Contact Method:</h3>
+        <div class="radio-group">
+            <div class="custom-radio-container" onclick="selectOption('Email')">
+                <div class="custom-radio-circle" id="radio-email"></div>
+                <label>📧 Email</label>
+            </div>
+            
+            <div class="custom-radio-container" onclick="selectOption('Phone')">
+                <div class="custom-radio-circle" id="radio-phone"></div>
+                <label>📞 Phone</label>
+            </div>
+            
+            <div class="custom-radio-container" onclick="selectOption('WhatsApp')">
+                <div class="custom-radio-circle" id="radio-whatsapp"></div>
+                <label>💬 WhatsApp</label>
+            </div>
+        </div>
+        
+        <div class="result" id="result">
+            <strong>Selected:</strong> <span id="selected-value">None</span>
+        </div>
+        
+        <h3>📋 Test Instructions:</h3>
+        <ul>
+            <li>✅ Click on any radio button option above</li>
+            <li>✅ Check if the circle fills with blue color when selected</li>
+            <li>✅ Check if a white dot appears in the center when selected</li>
+            <li>✅ Verify that only one option can be selected at a time</li>
+            <li>✅ Test hover effects (circles should scale slightly)</li>
+        </ul>
+        
+        <div style="margin-top: 30px; padding: 20px; background-color: #e3f2fd; border-radius: 8px;">
+            <h4 style="color: #1976d2; margin: 0 0 10px 0;">💡 Visual Improvements Made:</h4>
+            <ul style="margin: 0; color: #1976d2;">
+                <li><strong>Larger radio buttons</strong> (24px instead of default 16px)</li>
+                <li><strong>Clear visual feedback</strong> (blue background when selected)</li>
+                <li><strong>White dot indicator</strong> in the center when selected</li>
+                <li><strong>Hover effects</strong> with scaling animation</li>
+                <li><strong>Emojis for better identification</strong></li>
+                <li><strong>Background container</strong> for better visibility</li>
+                <li><strong>Proper spacing</strong> between options</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let selectedOption = null;
+        
+        function selectOption(option) {
+            // Clear all previous selections
+            document.querySelectorAll('.custom-radio-circle').forEach(circle => {
+                circle.classList.remove('checked');
+            });
+            
+            // Select the new option
+            const radioId = `radio-${option.toLowerCase()}`;
+            document.getElementById(radioId).classList.add('checked');
+            
+            // Update the result
+            selectedOption = option;
+            document.getElementById('selected-value').textContent = option;
+            
+            console.log('Selected contact method:', option);
+        }
+        
+        // Add some interactive feedback
+        document.querySelectorAll('.custom-radio-container').forEach(container => {
+            container.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f1f3f4';
+            });
+            
+            container.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+            });
+        });
+    </script>
+</body>
+</html>

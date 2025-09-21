@@ -1,0 +1,18 @@
+{
+  "topics": [
+    { "id": "cardiology", "name": "Cardiology", "attempted": 50, "total": 100, "description": "Study of the heart and its functions in health and disease." },
+    { "id": "neurology", "name": "Neurology", "attempted": 20, "total": 80, "description": "Branch of medicine dealing with disorders of the nervous system." },
+    { "id": "gastroenterology", "name": "Gastroenterology", "attempted": 75, "total": 75, "description": "Focuses on the digestive system and its disorders." },
+    { "id": "respiratory", "name": "Respiratory Medicine", "attempted": 10, "total": 50, "description": "Deals with diseases of the respiratory tract." },
+    { "id": "endocrinology", "name": "Endocrinology", "attempted": 0, "total": 60, "description": "Concerned with the endocrine glands and hormones." },
+    { "id": "pediatrics", "name": "Pediatrics", "attempted": 30, "total": 90, "description": "Branch of medicine involving the medical care of infants, children, and adolescents." },
+    { "id": "oncology", "name": "Oncology", "attempted": 15, "total": 70, "description": "Study and treatment of tumors (cancer)." },
+    { "id": "dermatology", "name": "Dermatology", "attempted": 40, "total": 60, "description": "Deals with the skin, nails, hair and its diseases." }
+  ],
+  "questions": [
+    { "question_id": "cardio_q1", "category_id": "cardiology", "question": "What is the primary function of the sinoatrial (SA) node?", "options": ["Pump blood", "Initiate heartbeat", "Filter blood", "Store oxygen"], "correct_answer": "Initiate heartbeat" },
+    { "question_id": "cardio_q2", "category_id": "cardiology", "question": "Which chamber of the heart receives deoxygenated blood from the body?", "options": ["Left atrium", "Right atrium", "Left ventricle", "Right ventricle"], "correct_answer": "Right atrium" },
+    { "question_id": "neuro_q1", "category_id": "neurology", "question": "What is the main neurotransmitter of the parasympathetic nervous system?", "options": ["Acetylcholine", "Dopamine", "Serotonin", "Norepinephrine"], "correct_answer": "Acetylcholine" },
+    { "question_id": "gastro_q1", "category_id": "gastroenterology", "question": "Which organ is primarily responsible for producing bile?", "options": ["Stomach", "Liver", "Pancreas", "Gallbladder"], "correct_answer": "Liver" }
+  ]
+}

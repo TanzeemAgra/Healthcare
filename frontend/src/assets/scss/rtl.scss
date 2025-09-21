@@ -1,0 +1,27 @@
+/*!
+* Version: 1.3.0
+* Template: Xerxez Clinic And Patient Management Dashboard
+* Author: iqonic.design
+* Design and Developed by: iqonic.design
+* NOTE: This file contains the styling for Template.
+*
+*/
+
+// Configuration
+@import "./bootstrap/functions";
+
+// Xerxez Design system
+@import "./Xerxez-design-system/variables";
+@import "./Xerxez-design-system/variables-dark";
+@import "./Xerxez-design-system/variables/index";
+@import "./bootstrap/variables";
+@import "./bootstrap/variables-dark";
+@import "./bootstrap/maps";
+@import "./bootstrap/mixins";
+@import "./bootstrap/utilities";
+
+// Xerxez Design System Mixin And Helper
+@import "./Xerxez-design-system/helper/mixins";
+@import "./Xerxez-design-system/helper/reboot";
+
+@import "./rtl/index";

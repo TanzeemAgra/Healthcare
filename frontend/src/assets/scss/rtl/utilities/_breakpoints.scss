@@ -1,0 +1,5 @@
+@use "../../bootstrap/variables" as bootstrap;
+
+// Breakpoint viewport sizes and media queries.
+$grid-breakpoints: bootstrap.$grid-breakpoints !default;
+$container-max-widths: bootstrap.$container-max-widths !default;

@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:list";
+
+// Add missing mixins that Bootstrap expects
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+
+  @each $key, $num in $map {
+    @if $prev-num == null or math.unit($num) == "%" or math.unit($prev-num) == "%" {
+      // Do nothing
+    } @else if not $prev-num < $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+@mixin _assert-starts-at-zero($map, $map-name: "$start-value") {
+  @if length($map) > 0 {
+    $values: map.values($map);
+    $first-value: list.nth($values, 1);
+
+    @if $first-value != 0 {
+      @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
+    }
+  }
+}

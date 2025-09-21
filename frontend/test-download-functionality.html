@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Download Functionality</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Test DNA Sequencing Download Functionality</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Download Tests</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6>Quick Downloads</h6>
+                            <button id="testPdf" class="btn btn-danger me-2 mb-2">
+                                <i class="bi bi-file-pdf"></i> Test PDF Download
+                            </button>
+                            <button id="testCsv" class="btn btn-success me-2 mb-2">
+                                <i class="bi bi-file-text"></i> Test CSV Download
+                            </button>
+                            <button id="testJson" class="btn btn-info me-2 mb-2">
+                                <i class="bi bi-code"></i> Test JSON Download
+                            </button>
+                            <button id="testVcf" class="btn btn-warning me-2 mb-2">
+                                <i class="bi bi-file-code"></i> Test VCF Download
+                            </button>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Client-Side Generation Tests</h6>
+                            <button id="testClientCsv" class="btn btn-outline-success me-2 mb-2">
+                                Client CSV
+                            </button>
+                            <button id="testClientJson" class="btn btn-outline-info me-2 mb-2">
+                                Client JSON
+                            </button>
+                            <button id="testClientVcf" class="btn btn-outline-warning me-2 mb-2">
+                                Client VCF
+                            </button>
+                        </div>
+                        
+                        <div id="status" class="mt-3"></div>
+                        <div id="progress" class="mt-3" style="display: none;">
+                            <div class="progress">
+                                <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:8000';
+        
+        const testData = {
+            sample_id: 'TEST-DOWNLOAD-001',
+            data: {
+                sample_info: {
+                    sample_id: 'TEST-DOWNLOAD-001',
+                    patient_name: 'Test Patient',
+                    quality_score: 95.5,
+                    sequencing_type: 'Whole Genome Sequencing'
+                },
+                variants: [
+                    {
+                        chromosome: 'chr17',
+                        position: 43094124,
+                        ref: 'G',
+                        alt: 'A',
+                        gene: 'BRCA1',
+                        impact: 'HIGH',
+                        clinical_significance: 'Pathogenic',
+                        quality: 98.5,
+                        coverage: 45,
+                        dbsnp_id: 'rs80357382'
+                    },
+                    {
+                        chromosome: 'chr13',
+                        position: 32936732,
+                        ref: 'T',
+                        alt: 'C',
+                        gene: 'BRCA2',
+                        impact: 'MODERATE',
+                        clinical_significance: 'Likely Pathogenic',
+                        quality: 97.2,
+                        coverage: 52,
+                        dbsnp_id: 'rs28897696'
+                    }
+                ]
+            }
+        };
+
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        function showProgress(show = false) {
+            const progressDiv = document.getElementById('progress');
+            progressDiv.style.display = show ? 'block' : 'none';
+        }
+
+        function updateProgress(percent) {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = `${percent}%`;
+            progressBar.textContent = `${percent}%`;
+        }
+
+        async function testServerDownload(endpoint, format) {
+            try {
+                showStatus(`Testing ${format.toUpperCase()} server download...`, 'info');
+                showProgress(true);
+                updateProgress(20);
+
+                const response = await fetch(`${API_BASE}/dna-sequencing/api/export/${endpoint}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                updateProgress(60);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                updateProgress(80);
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `test_download.${endpoint}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+
+                updateProgress(100);
+                showStatus(`✅ ${format.toUpperCase()} download completed successfully!`, 'success');
+                
+                setTimeout(() => showProgress(false), 2000);
+
+            } catch (error) {
+                console.error('Download failed:', error);
+                showStatus(`❌ ${format.toUpperCase()} download failed: ${error.message}`, 'danger');
+                showProgress(false);
+            }
+        }
+
+        function generateClientCSV(data) {
+            let csv = 'Chromosome,Position,Ref,Alt,Gene,Impact,Clinical_Significance,Quality,Coverage,dbSNP_ID\\n';
+            if (data.variants) {
+                data.variants.forEach(variant => {
+                    csv += `${variant.chromosome},${variant.position},${variant.ref},${variant.alt},${variant.gene},${variant.impact},${variant.clinical_significance},${variant.quality},${variant.coverage},${variant.dbsnp_id}\\n`;
+                });
+            }
+            return csv;
+        }
+
+        function generateClientJSON(data) {
+            return JSON.stringify(data, null, 2);
+        }
+
+        function generateClientVCF(data) {
+            let vcf = '##fileformat=VCFv4.2\\n';
+            vcf += `##fileDate=${new Date().toISOString().slice(0, 10)}\\n`;
+            vcf += '##source=ClientSideGeneration\\n';
+            vcf += '#CHROM\\tPOS\\tID\\tREF\\tALT\\tQUAL\\tFILTER\\tINFO\\n';
+            
+            if (data.variants) {
+                data.variants.forEach(variant => {
+                    const chrom = variant.chromosome.replace('chr', '');
+                    vcf += `${chrom}\\t${variant.position}\\t${variant.dbsnp_id || '.'}\\t${variant.ref}\\t${variant.alt}\\t${variant.quality}\\tPASS\\tGENE=${variant.gene};IMPACT=${variant.impact}\\n`;
+                });
+            }
+            return vcf;
+        }
+
+        function testClientDownload(format) {
+            try {
+                showStatus(`Generating ${format.toUpperCase()} client-side...`, 'info');
+                
+                let content, mimeType, extension;
+                
+                switch (format) {
+                    case 'csv':
+                        content = generateClientCSV(testData.data);
+                        mimeType = 'text/csv';
+                        extension = 'csv';
+                        break;
+                    case 'json':
+                        content = generateClientJSON(testData.data);
+                        mimeType = 'application/json';
+                        extension = 'json';
+                        break;
+                    case 'vcf':
+                        content = generateClientVCF(testData.data);
+                        mimeType = 'text/plain';
+                        extension = 'vcf';
+                        break;
+                    default:
+                        throw new Error('Unknown format');
+                }
+
+                const blob = new Blob([content], { type: mimeType });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `client_test.${extension}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+
+                showStatus(`✅ Client ${format.toUpperCase()} download completed!`, 'success');
+
+            } catch (error) {
+                console.error('Client download failed:', error);
+                showStatus(`❌ Client ${format.toUpperCase()} failed: ${error.message}`, 'danger');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('testPdf').addEventListener('click', () => testServerDownload('pdf', 'PDF'));
+        document.getElementById('testCsv').addEventListener('click', () => testServerDownload('csv', 'CSV'));
+        document.getElementById('testJson').addEventListener('click', () => testServerDownload('json', 'JSON'));
+        document.getElementById('testVcf').addEventListener('click', () => testServerDownload('vcf', 'VCF'));
+
+        document.getElementById('testClientCsv').addEventListener('click', () => testClientDownload('csv'));
+        document.getElementById('testClientJson').addEventListener('click', () => testClientDownload('json'));
+        document.getElementById('testClientVcf').addEventListener('click', () => testClientDownload('vcf'));
+    </script>
+</body>
+</html>

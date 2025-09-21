@@ -1,0 +1,225 @@
+# ==============================================================================
+# HEALTHCARE APPLICATION .GITIGNORE
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# MARKDOWN FILES (SELECTIVE IGNORING)
+# ------------------------------------------------------------------------------
+# Allow important documentation
+!README.md
+!docs/README.md
+# Ignore temporary markdown files
+*.md.tmp
+*.md.bak
+
+# ------------------------------------------------------------------------------
+# NODE.JS & FRONTEND
+# ------------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+frontend/build/
+frontend/dist/
+out/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.vite/
+.turbo/
+.nx/cache/
+.eslintcache
+
+# ------------------------------------------------------------------------------
+# PYTHON & DJANGO BACKEND
+# ------------------------------------------------------------------------------
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+backend/venv/
+backend/migration_env/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+
+# Django migrations (uncomment if you want to ignore them)
+# migrations/
+
+# ------------------------------------------------------------------------------
+# ENVIRONMENT VARIABLES & SECRETS
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.*
+**/.env.local
+
+# Railway environment files (templates are in utilities/)
+.env.railway
+.env.production
+.env.migration
+
+# API Keys and sensitive files
+**/api_keys.txt
+**/*_key.sh
+**/*_secret*
+afham3.pem
+*.pem
+*.key
+*.p12
+
+# Healthcare specific sensitive data
+patient_data/
+medical_records/
+**/temp_test_*.py
+
+# ------------------------------------------------------------------------------
+# DATABASE
+# ------------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# ------------------------------------------------------------------------------
+# DEVELOPMENT & TESTING
+# ------------------------------------------------------------------------------
+coverage/
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Test databases
+test_*.db
+test_*.sqlite3
+
+# ------------------------------------------------------------------------------
+# EDITOR & IDE
+# ------------------------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ------------------------------------------------------------------------------
+# DEPLOYMENT & CLOUD
+# ------------------------------------------------------------------------------
+.vercel/
+.railway/
+.platform/
+
+# Railway specific
+railway.toml.bak
+
+# Vercel specific  
+.vercel
+.next/
+
+# Docker (not used but keep for completeness)
+.dockerignore
+docker-compose.override.yml
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# ------------------------------------------------------------------------------
+# LOGS & MONITORING
+# ------------------------------------------------------------------------------
+logs/
+*.log
+logs/*.log
+
+# ------------------------------------------------------------------------------
+# TEMPORARY & BACKUP FILES
+# ------------------------------------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+.#*
+.*.tmp
+
+# Project specific temporary files
+maintain_structure.py.bak
+migration_report_*.json
+backup_info_*.json
+
+# ------------------------------------------------------------------------------
+# HEALTHCARE COMPLIANCE & SECURITY
+# ------------------------------------------------------------------------------
+# PHI (Protected Health Information) - Never commit these
+phi_data/
+patient_exports/
+medical_images/
+encrypted_backups/
+audit_logs/
+compliance_reports/
+
+# Backup files that might contain sensitive data
+*.sql.bak
+*.dump
+database_backup_*
+
+# ------------------------------------------------------------------------------
+# LEGACY & DEPRECATED
+# ------------------------------------------------------------------------------
+# Old project references
+CODE-REACT/

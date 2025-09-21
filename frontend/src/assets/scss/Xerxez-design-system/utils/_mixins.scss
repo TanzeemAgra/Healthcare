@@ -1,0 +1,8 @@
+@use "sass:color";
+@use "sass:math";
+@use "../../bootstrap/functions" as functions;
+
+// Re-export the assert-ascending mixin
+@mixin assert-ascending($map, $map-name) {
+  @include functions._assert-ascending($map, $map-name);
+}

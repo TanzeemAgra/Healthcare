@@ -1,0 +1,383 @@
+/* Modern Subscription Page Styles */
+.modern-subscription-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.subscription-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 2rem auto;
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-header h1 {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+.billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.billing-switch .form-check-input {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    width: 3rem;
+    height: 1.5rem;
+}
+
+.billing-switch .form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Plan Cards */
+.plan-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.plan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.popular-plan {
+    border: 3px solid #28a745;
+    transform: scale(1.05);
+}
+
+.popular-plan:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.current-plan {
+    border: 3px solid #007bff;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.05));
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    z-index: 10;
+}
+
+.plan-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-section {
+    position: relative;
+}
+
+.price-display {
+    margin-bottom: 1rem;
+}
+
+.currency {
+    font-size: 1.5rem;
+    vertical-align: top;
+    color: #6c757d;
+}
+
+.price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #2c3e50;
+}
+
+.period {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-left: 0.25rem;
+}
+
+.savings-info {
+    margin-top: 0.5rem;
+}
+
+/* Features */
+.features-list {
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.feature-item.included {
+    color: #28a745;
+}
+
+.feature-item.not-included {
+    color: #6c757d;
+    opacity: 0.6;
+}
+
+.feature-icon {
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+}
+
+.feature-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+/* Limits Section */
+.limits-section {
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.limits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.limit-item {
+    text-align: center;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.limit-item small {
+    display: block;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.limit-item strong {
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+/* Subscription Overview */
+.subscription-overview {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(40, 167, 69, 0.1));
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Usage Stats */
+.usage-stats {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.usage-item {
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 12px;
+    padding: 1rem;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.usage-item:hover {
+    background: rgba(0, 123, 255, 0.05);
+    border-color: rgba(0, 123, 255, 0.2);
+}
+
+/* Additional Services */
+.additional-services {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.service-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.price-tag {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* Custom Tabs */
+.nav-pills-custom .nav-link {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 12px;
+    margin-right: 0.5rem;
+    color: #667eea;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-pills-custom .nav-link:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.nav-pills-custom .nav-link.active {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modern-subscription-page {
+        padding: 1rem 0;
+    }
+    
+    .subscription-header {
+        margin: 1rem;
+        padding: 2rem 1rem;
+    }
+    
+    .subscription-header h1 {
+        font-size: 2rem;
+    }
+    
+    .plan-card {
+        margin-bottom: 2rem;
+    }
+    
+    .popular-plan {
+        transform: none;
+    }
+    
+    .popular-plan:hover {
+        transform: translateY(-5px);
+    }
+    
+    .price {
+        font-size: 2.5rem;
+    }
+    
+    .limits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .billing-toggle {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Animation Classes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.plan-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.plan-card:nth-child(1) { animation-delay: 0.1s; }
+.plan-card:nth-child(2) { animation-delay: 0.2s; }
+.plan-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Modal Enhancements */
+.modal-content {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px 20px 0 0;
+}
+
+.plan-preview {
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.pricing-preview {
+    margin: 1rem 0;
+}
+
+/* Loading States */
+.btn .spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Custom Scrollbar */
+.modern-subscription-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modern-subscription-page::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.modern-subscription-page::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+.modern-subscription-page::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #5a67d8, #6b46c1);
+}
